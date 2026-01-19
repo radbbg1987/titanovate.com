@@ -1,516 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="en" data-theme="dark">
 <head>
-    <title>Titanovate</title>
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Titanovate | Innovative Investment Solutions for Tomorrow's Economy" />
-    <meta name="author" content="Titanovate" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <meta property="og:title" content="Titanovate" />
-    <meta property='og:description' content="Titanovate | Innovative Investment Solutions for Tomorrow's Economy" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://titanovate.com/images/social-card.jpg" />
-    <meta property="og:url" content="https://titanovate.com" />
-
-    <style>
-        :root {
-            --primary: #0a3d62;
-            --secondary: #60a3bc;
-            --accent: #4a69bd;
-            --light: #f8f9fa;
-            --dark: #1e272e;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background-color: var(--primary);
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            color: white;
-            font-size: 28px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo span {
-            color: var(--secondary);
-        }
-
-        .hero {
-            height: 85vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, rgba(10, 61, 98, 0.1) 0%, rgba(74, 105, 189, 0.1) 100%);
-        }
-
-        .hero-content {
-            width: 50%;
-            padding-right: 20px;
-        }
-
-        .hero-image {
-            width: 50%;
-            display: flex;
-            justify-content: center;
-        }
-
-        h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: var(--primary);
-            line-height: 1.2;
-        }
-
-        p {
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin: 40px 0;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            flex: 1;
-            margin: 0 10px;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-number {
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .stat-label {
-            font-size: 16px;
-            color: var(--dark);
-            margin-top: 8px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background-color: var(--accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(74, 105, 189, 0.2);
-        }
-
-        .cta-button:hover {
-            background-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(74, 105, 189, 0.3);
-        }
-
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin: 60px 0;
-        }
-
-        .feature {
-            flex-basis: calc(33.33% - 20px);
-            margin-bottom: 40px;
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .feature:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-
-        footer {
-            background-color: var(--primary);
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--secondary);
-        }
-
-        .copyright {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Graph animation */
-        .graph-container {
-            position: relative;
-            height: 200px;
-            width: 100%;
-            max-width: 400px;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-
-        .graph-line {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 70%;
-            background: linear-gradient(90deg, transparent, var(--accent));
-            clip-path: polygon(0 100%, 10% 80%, 20% 90%, 30% 70%, 40% 85%, 50% 60%, 60% 70%, 70% 50%, 80% 65%, 90% 40%, 100% 50%, 100% 100%);
-            animation: graphAnimate 10s infinite alternate;
-        }
-
-        @keyframes graphAnimate {
-            0% {
-                clip-path: polygon(0 100%, 10% 80%, 20% 90%, 30% 70%, 40% 85%, 50% 60%, 60% 70%, 70% 50%, 80% 65%, 90% 40%, 100% 50%, 100% 100%);
-            }
-
-            50% {
-                clip-path: polygon(0 100%, 10% 75%, 20% 85%, 30% 65%, 40% 80%, 50% 55%, 60% 65%, 70% 45%, 80% 60%, 90% 35%, 100% 45%, 100% 100%);
-            }
-
-            100% {
-                clip-path: polygon(0 100%, 10% 70%, 20% 80%, 30% 60%, 40% 75%, 50% 50%, 60% 60%, 70% 40%, 80% 55%, 90% 30%, 100% 40%, 100% 100%);
-            }
-        }
-
-        /* Modal for email signup */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--dark);
-        }
-
-        .contact-form {
-            margin-top: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--primary);
-        }
-
-        @media (max-width: 768px) {
-
-            .hero-content,
-            .hero-image {
-                width: 100%;
-            }
-
-            .hero {
-                flex-direction: column;
-                height: auto;
-                padding: 50px 0;
-            }
-
-            .hero-image {
-                margin-top: 40px;
-            }
-
-            h1 {
-                font-size: 36px;
-            }
-
-            .stats {
-                flex-direction: column;
-            }
-
-            .stat-item {
-                margin: 10px 0;
-            }
-
-            .feature {
-                flex-basis: 100%;
-            }
-        }
-    </style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Titanovate Tech — Risk Intelligence Investing</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    /* Card hover animation similar to MarketSmith layout */
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+    .feature-card h3 {
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+    .feature-card a {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .feature-card a:hover {
+      opacity: 0.9;
+    }
+  </style>
 </head>
-
 <body>
-    <header>
-        <div class="container">
-            <div class="navbar">
-                <div class="logo">
-                    Titanovat<span>e</span>
-                </div>
-            </div>
-        </div>
-    </header>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Innovative Investment Solutions for Tomorrow's Economy</h1>
-                <p>At Titanovate, we combine cutting-edge technology with expert financial analysis to deliver
-                    consistent growth and exceptional returns for our investors.</p>
-                <button class="cta-button" id="contact-button">Contact Us</button>
-            </div>
-            <div class="hero-image">
-                <div class="graph-container">
-                    <div class="graph-line"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="inner">
+      <div class="brand">
+        <span class="logo"></span>
+        <strong>Titanovate Tech</strong>
+        <span class="small">Risk Intelligence Investing for the Global Investor (R.I.G. system)</span>
+      </div>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="risk.html">Risk Screener</a>
+        <a href="wealth.html">Wealth Builder</a>
+        <a href="trading.html">Trading Studio</a>
+        
+		<div class="nav-dropdown">
+		 <a href="#" class="nav-dropdown-toggle">About ▾</a>
+		 <div class="nav-dropdown-menu">
+			<a href="history.html">History</a>
+			<a href="legalagreement.html">Legal Agreement</a>
+			<a href="privacypolicy.html">Privacy Policy</a>
+			<a href="disclaimer.html">Disclaimer</a>
+		 </div>
+		</div>
 
-    <section class="container">
-        <!--
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-number">xx.xx%</div>
-                <div class="stat-label">Average Annual Return</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">$x.xM</div>
-                <div class="stat-label">Assets Under Management</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">xx+</div>
-                <div class="stat-label">Years of Excellence</div>
-            </div>
-        </div>
-        -->
-
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">↗</div>
-                <h3>Data-Driven Strategy</h3>
-                <p>Our proprietary algorithms analyze market trends and identify opportunities that others miss.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🛡️</div>
-                <h3>Risk Management</h3>
-                <p>Sophisticated risk assessment models help protect and grow your investment even in volatile markets.
-                </p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">👥</div>
-                <h3>Expert Team</h3>
-                <p>Our team combines decades of financial expertise with innovation in technology and data science.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">📊</div>
-                <h3>Transparent Reporting</h3>
-                <p>Regular, clear updates on performance metrics and investment strategies.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">💼</div>
-                <h3>Tailored Solutions</h3>
-                <p>Investment strategies customized to your financial goals and risk tolerance.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🌐</div>
-                <h3>Global Perspective</h3>
-                <p>Diversified investments across markets and sectors to maximize opportunity and minimize risk.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo">
-                    Titanovat<span>e</span>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; Titanovate. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Email Modal -->
-    <div class="modal" id="contact-modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Contact Titanovate</h2>
-            <p>Please enter your information below, and our team will reach out to you promptly.</p>
-            <form class="form">
-                <div class="form-group">
-                    <label for="name">👤 Name</label>
-                    <input type="text" id="name" placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">✉️ Email</label>
-                    <input type="email" id="email" placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                    <label for="phone">📞 Phone (Optional)</label>
-                    <input type="tel" id="phone" placeholder="Your Phone Number">
-                </div>
-                <button type="submit" class="submit-btn">Submit</button>
-                <div style="display:none" class="thankyou_message">
-                    <br>
-                    <p>Thank you for your interest! Our team will contact you shortly.</p>
-                </div>
-            </form>
-        </div>
+<a class="cta" href="pricing.html">Get Started</a>
+        <button class="toggle" data-toggle-theme>🌙 / ☀️</button>
+      </div>
     </div>
+  </div>
 
-    <script>
-        // Modal functionality
-        const modal = document.getElementById('contact-modal');
-        const contactBtn = document.getElementById('contact-button');
-        const closeModal = document.querySelector('.close-modal');
+  <!-- HERO -->
+  <section class="hero container" style="text-align:center;">
+    <span class="badge">Introducing the R.I.G. System</span>
+    <h1 style="margin-top:12px;">Risk-tiered portfolio intelligence for global investors</h1>
+    <p style="margin:auto;max-width:800px;">
+      The Titanovate R.I.G. System helps you understand, align, and optimize your investments. 
+      From personalized risk assessment to intelligent portfolio construction and advanced trading tools — 
+      our technology drives performance across markets.
+    </p>
+  </section>
 
-        contactBtn.addEventListener('click', () => {
-            modal.style.display = 'flex';
-        });
+  <!-- FEATURE NAVIGATION -->
+  <section class="container">
+    <div class="grid">
+      <div class="feature-card">
+        <h3>Step 1 · Risk Screener</h3>
+        <p>Define your investor profile with our proprietary R.I.G. model and assess drawdown, horizon, and growth objectives.</p>
+        <a href="risk.html">Start</a>
+      </div>
+      <div class="feature-card">
+        <h3>Step 2 · Wealth Builder</h3>
+        <p>Tiered portfolio construction based on your Risk Score.<br>Tier 1: Steady Growth · Tier 2: Accelerated Growth.</p>
+        <a href="wealth.html">Build</a>
+      </div>
+      <div class="feature-card">
+        <h3>Step 3 · Trading Studio</h3>
+        <p>Premium Algo Engine strategies for advanced investors — options, leveraged ETFs, FX & futures automation.</p>
+        <a href="trading.html">Explore</a>
+      </div>
+      <div class="feature-card">
+        <h3>Step 4 · Pricing & Support</h3>
+        <p>View subscription plans, explore FAQs, or contact our support team directly to get started with Titanovate Tech.</p>
+        <a href="pricing.html">View Plans</a>
+      </div>
+    </div>
+  </section>
 
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
+  <!-- INFO GRID -->
+  <section class="container" style="margin-top:20px">
+    <div class="grid">
+      <div class="card kpi">
+        <div class="section-title">
+          <span class="dot"></span>
+          <strong>Proprietary Signal Engine</strong>
+        </div>
+        <p class="small">All analytics driven by Titanovate’s institutional logic — no third-party dependencies.</p>
+      </div>
+      <div class="card kpi">
+        <div class="section-title">
+          <span class="dot"></span>
+          <strong>Tiered Risk Architecture</strong>
+        </div>
+        <p class="small">Designed for global investors with region-specific models — UK, India, and US.</p>
+      </div>
+      <div class="card kpi">
+        <div class="section-title">
+          <span class="dot"></span>
+          <strong>Data-Driven Optimization</strong>
+        </div>
+        <p class="small">Sharpe-based optimization with benchmark comparison ensures rational, risk-aligned portfolio decisions.</p>
+      </div>
+    </div>
+  </section>
 
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
+  <!-- FOOTER -->
+  <div class="container footer small">
+  © 2025 Titanovate Tech. Proprietary Institutional Logic. All rights reserved.
+  <span style="opacity:.75"> · </span>
+  <a href="disclaimer.html">Disclaimer</a>
+  <span style="opacity:.75"> · </span>
+  <a href="legalagreement.html">Legal Agreement</a>
+  <span style="opacity:.75"> · </span>
+  <a href="privacypolicy.html">Privacy Policy</a>
+</div>
 
-        // Form submission
-        const form = document.querySelector('.contact-form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            form.reset();
-            modal.style.display = 'none';
-            var thankYouMessage = form.querySelector(".thankyou_message");
-            if (thankYouMessage) {
-                thankYouMessage.style.display = "block";
-            }
-        });
-    </script>
+
+  <script src="script.js"></script>
 </body>
-
 </html>
