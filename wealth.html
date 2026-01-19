@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Wealth Builder — Titanovate Tech</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+    th { text-align: left; }
+    .pill { background: var(--badge); color: var(--text); padding: 4px 8px; border-radius: 999px; font-size: 12px; }
+    .controls .card { min-height: 100%; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="inner">
+      <div class="brand">
+        <span class="logo"></span>
+        <strong>Titanovate Tech</strong>
+        <span class="small">Risk Intelligence Investing for the Global Investor (R.I.G. system)</span>
+      </div>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="risk.html">Risk Screener</a>
+        <a href="wealth.html">Wealth Builder</a>
+        <a href="trading.html">Trading Studio</a>
+        
+		<div class="nav-dropdown">
+		 <a href="#" class="nav-dropdown-toggle">About ▾</a>
+		 <div class="nav-dropdown-menu">
+			<a href="history.html">History</a>
+			<a href="legalagreement.html">Legal Agreement</a>
+			<a href="privacypolicy.html">Privacy Policy</a>
+			<a href="disclaimer.html">Disclaimer</a>
+		 </div>
+		</div>
+
+        <a class="cta" href="#">Get Started</a>
+        <button class="toggle" data-toggle-theme>🌙 / ☀️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEALTH BUILDER -->
+  <div class="container">
+    <h2 class="section-title"><span class="dot"></span> Wealth Builder</h2>
+    <p class="small">
+      Tiered portfolio construction based on your R.I.G. score. Tier 1 targets steady growth; Tier 2 targets accelerated growth with higher risk.
+    </p>
+
+    <div class="grid controls">
+      <div class="card">
+        <h3>Portfolio Inputs</h3>
+        <div class="grid">
+          <div>
+            <label>Market</label>
+            <select id="market">
+              <option value="US" selected>US</option>
+              <option value="UK">UK</option>
+              <option value="India">India</option>
+            </select>
+          </div>
+          <div>
+            <label>Tier</label>
+            <select id="tier">
+              <option value="1" selected>Tier 1 — Steady</option>
+              <option value="2">Tier 2 — Accelerated</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <label>Factors to consider</label>
+          <div>
+            <label><input type="checkbox" class="factor" value="Momentum" checked> Momentum (6M/12M)</label><br/>
+            <label><input type="checkbox" class="factor" value="Money Flow" checked> Money Flow</label><br/>
+            <label><input type="checkbox" class="factor" value="Valuation"> Valuation (PE vs sector)</label><br/>
+            <label><input type="checkbox" class="factor" value="EPS Growth" checked> EPS Growth</label>
+          </div>
+        </div>
+        <button class="cta" id="btnBuild" style="margin-top:10px">Show Example Portfolio</button>
+        <p class="small" id="factorNote" style="margin-top:8px; color:var(--muted)"></p>
+      </div>
+
+      <div class="card">
+        <h3>Sharpe Visualizer (Example)</h3>
+        <div id="lineChart" style="height:320px"></div>
+        <p class="small">Simulated cumulative returns (Portfolio vs Benchmark). Replace with your optimizer outputs when wired.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>Example Portfolio</h3>
+      <table id="portfolioTable">
+        <thead>
+          <tr>
+            <th>Ticker</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- filled by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="container footer small">
+  © 2025 Titanovate Tech. Proprietary Institutional Logic. All rights reserved.
+  <span style="opacity:.75"> · </span>
+  <a href="disclaimer.html">Disclaimer</a>
+  <span style="opacity:.75"> · </span>
+  <a href="legalagreement.html">Legal Agreement</a>
+  <span style="opacity:.75"> · </span>
+  <a href="privacypolicy.html">Privacy Policy</a>
+</div>
+
+  <script src="script.js"></script>
+  <script>
+    // Curated example portfolios (static seeds)
+    const EXAMPLES = {
+      US: {
+        "1": [
+          {t:"VOO", n:"S&P 500 ETF", type:"ETF", w:25},
+          {t:"QQQ", n:"NASDAQ 100 ETF", type:"ETF", w:15},
+          {t:"VGT", n:"Info Tech ETF", type:"ETF", w:10},
+          {t:"VHT", n:"Health Care ETF", type:"ETF", w:10},
+          {t:"MSFT", n:"Microsoft", type:"Stock", w:10},
+          {t:"AAPL", n:"Apple", type:"Stock", w:10},
+          {t:"KO", n:"Coca-Cola", type:"Stock", w:5},
+          {t:"JNJ", n:"Johnson & Johnson", type:"Stock", w:5},
+          {t:"GLD", n:"Gold Trust", type:"ETF", w:5},
+          {t:"IEF", n:"7-10Y Treasury", type:"ETF", w:5}
+        ],
+        "2": [
+          {t:"SOXX", n:"iShares Semiconductors", type:"ETF", w:18},
+          {t:"SMH", n:"VanEck Semiconductors", type:"ETF", w:15},
+          {t:"NVDA", n:"NVIDIA", type:"Stock", w:8},
+          {t:"META", n:"Meta Platforms", type:"Stock", w:8},
+          {t:"TQQQ", n:"3x NASDAQ 100", type:"Lev ETF", w:6},
+          {t:"SSO", n:"2x S&P 500", type:"Lev ETF", w:6},
+          {t:"IWM", n:"Russell 2000", type:"ETF", w:12},
+          {t:"XLK", n:"Tech Select Sector", type:"ETF", w:12},
+          {t:"GLD", n:"Gold Trust", type:"ETF", w:7},
+          {t:"BIL", n:"Treasury Bill 1-3M", type:"ETF", w:8}
+        ]
+      },
+      UK: {
+        "1": [
+          {t:"VUKE", n:"FTSE 100 UCITS", type:"ETF", w:30},
+          {t:"ISF", n:"iShares Core FTSE 100", type:"ETF", w:20},
+          {t:"AZN", n:"AstraZeneca", type:"Stock", w:8},
+          {t:"ULVR", n:"Unilever", type:"Stock", w:8},
+          {t:"SHEL", n:"Shell", type:"Stock", w:8},
+          {t:"BP.", n:"BP", type:"Stock", w:6},
+          {t:"GSK", n:"GSK", type:"Stock", w:6},
+          {t:"VUSA", n:"S&P 500 UCITS", type:"ETF", w:8},
+          {t:"SGLN", n:"Physical Gold", type:"ETF", w:6}
+        ],
+        "2": [
+          {t:"IITU", n:"MSCI USA Tech UCITS", type:"ETF", w:20},
+          {t:"EQQQ", n:"NASDAQ 100 UCITS", type:"ETF", w:18},
+          {t:"SWT", n:"Scottish Mortgage (growth)", type:"Trust", w:10},
+          {t:"NVDA", n:"NVIDIA (USD)", type:"Stock", w:6},
+          {t:"SHEL", n:"Shell", type:"Stock", w:8},
+          {t:"AZN", n:"AstraZeneca", type:"Stock", w:8},
+          {t:"IWMU", n:"Russell 2000 UCITS", type:"ETF", w:12},
+          {t:"PSP1", n:"Prosus (tech exposure)", type:"Stock", w:6},
+          {t:"SGLN", n:"Physical Gold", type:"ETF", w:12}
+        ]
+      },
+      India: {
+        "1": [
+          {t:"NIFTYBEES", n:"Nifty 50 ETF", type:"ETF", w:35},
+          {t:"BANKBEES", n:"Bank Nifty ETF", type:"ETF", w:15},
+          {t:"RELIANCE", n:"Reliance Ind.", type:"Stock", w:10},
+          {t:"HDFCBANK", n:"HDFC Bank", type:"Stock", w:8},
+          {t:"TCS", n:"TCS", type:"Stock", w:8},
+          {t:"INFY", n:"Infosys", type:"Stock", w:7},
+          {t:"ITC", n:"ITC", type:"Stock", w:5},
+          {t:"SBIN", n:"State Bank of India", type:"Stock", w:5},
+          {t:"GOLDBEES", n:"Gold ETF", type:"ETF", w:7}
+        ],
+        "2": [
+          {t:"ITBEES", n:"IT Sector ETF", type:"ETF", w:18},
+          {t:"MIDCAPETF", n:"Midcap ETF", type:"ETF", w:18},
+          {t:"RELIANCE", n:"Reliance Ind.", type:"Stock", w:8},
+          {t:"BAJFINANCE", n:"Bajaj Finance", type:"Stock", w:8},
+          {t:"HDFCBANK", n:"HDFC Bank", type:"Stock", w:7},
+          {t:"TCS", n:"TCS", type:"Stock", w:7},
+          {t:"INFY", n:"Infosys", type:"Stock", w:7},
+          {t:"LTIM", n:"LTIMindtree", type:"Stock", w:7},
+          {t:"GOLDBEES", n:"Gold ETF", type:"ETF", w:10},
+          {t:"LIQUID", n:"Liquid/Overnight", type:"Fund", w:10}
+        ]
+      }
+    };
+
+    function renderTable(rows) {
+      const tbody = document.querySelector("#portfolioTable tbody");
+      tbody.innerHTML = rows.map(r => `
+        <tr>
+          <td><span class="pill">${r.t}</span></td>
+          <td>${r.n}</td>
+          <td>${r.type}</td>
+          <td>${r.w}%</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderChart() {
+      // Simple synthetic curves (replace with real optimizer data)
+      const n = 250;
+      let port = [1], bench = [1];
+      for (let i=1; i<n; i++){
+        const pr = port[i-1] * (1 + (0.0006 + (Math.random()-0.5)*0.004));
+        const br = bench[i-1] * (1 + (0.00045 + (Math.random()-0.5)*0.0035));
+        port.push(pr);
+        bench.push(br);
+      }
+      const x = Array.from({length:n}, (_,i)=>i);
+
+      Plotly.newPlot("lineChart", [
+        { x, y: port, name: "Portfolio", mode: "lines" },
+        { x, y: bench, name: "Benchmark", mode: "lines" }
+      ], {
+        margin: { t: 20, l: 40, r: 10, b: 30 },
+        paper_bgcolor: "rgba(0,0,0,0)",
+        plot_bgcolor: "rgba(0,0,0,0)",
+        yaxis: { title: "Cumulative (indexed)" },
+        xaxis: { title: "Days" },
+        showlegend: true
+      }, { displayModeBar: false });
+    }
+
+    document.getElementById("btnBuild").addEventListener("click", () => {
+      const market = document.getElementById("market").value;
+      const tier = document.getElementById("tier").value;
+      const factors = Array.from(document.querySelectorAll(".factor:checked")).map(x=>x.value);
+
+      renderTable(EXAMPLES[market][tier]);
+      document.getElementById("factorNote").textContent =
+        "Factors applied: " + (factors.length ? factors.join(", ") : "None");
+
+      renderChart();
+    });
+
+    // Default view
+    renderTable(EXAMPLES["US"]["1"]);
+    renderChart();
+    document.getElementById("factorNote").textContent = "Factors applied: Momentum, Money Flow, EPS Growth";
+  </script>
+</body>
+</html>

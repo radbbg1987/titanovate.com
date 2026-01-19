@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Pricing & Support — Titanovate Tech</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    .pricing-toggle { text-align: center; margin-bottom: 20px; }
+    .pricing-toggle button {
+      margin: 5px; padding: 8px 18px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      color: #fff; font-weight: 600; border: none; cursor: pointer;
+    }
+    .pricing-toggle button.active { background: var(--teal); }
+
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px; margin-top: 20px;
+    }
+    .pricing-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+    .pricing-card h3 { margin-bottom: 10px; }
+    .pricing-card h2 { font-size: 32px; color: var(--primary); margin-bottom: 10px; }
+    .pricing-card ul { list-style: none; padding: 0; text-align: left; }
+    .pricing-card ul li { margin: 6px 0; color: var(--muted); font-size: 14px; }
+    .subscribe-btn {
+      display: inline-block; margin-top: 12px; padding: 10px 20px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      color: #fff; font-weight: 600; text-decoration: none;
+    }
+    .subscribe-btn:hover { opacity: 0.9; }
+
+    .notice { margin-top:10px; color: var(--muted); font-size: 13px; }
+    .success { color: #10b981; }
+    .error { color: #ef4444; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="inner">
+      <div class="brand">
+        <span class="logo"></span>
+        <strong>Titanovate Tech</strong>
+        <span class="small">Risk Intelligence Investing for the Global Investor (R.I.G. system)</span>
+      </div>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="risk.html">Risk Screener</a>
+        <a href="wealth.html">Wealth Builder</a>
+        <a href="trading.html">Trading Studio</a>
+        
+		<div class="nav-dropdown">
+		 <a href="#" class="nav-dropdown-toggle">About ▾</a>
+		 <div class="nav-dropdown-menu">
+			<a href="history.html">History</a>
+			<a href="legalagreement.html">Legal Agreement</a>
+			<a href="privacypolicy.html">Privacy Policy</a>
+			<a href="disclaimer.html">Disclaimer</a>
+		 </div>
+		</div>
+
+        <a class="cta" href="#">Get Started</a>
+        <button class="toggle" data-toggle-theme>🌙 / ☀️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="container">
+    <h2 class="section-title"><span class="dot"></span> Pricing & Support</h2>
+    <p class="small">Select a plan that suits your investment journey. Annual subscribers receive a 20% discount.</p>
+
+    <div class="pricing-toggle">
+      <button id="monthlyBtn" class="active">Monthly</button>
+      <button id="annualBtn">Annual (Save 20%)</button>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Tier 1 — Steady Growth</h3>
+        <h2 id="tier1Price">£25 / mo</h2>
+        <ul>
+          <li>Risk Screener access</li>
+          <li>Wealth Builder Tier 1 strategy</li>
+          <li>Sharpe optimizer (basic)</li>
+          <li>Quarterly portfolio insights</li>
+        </ul>
+        <a href="#" class="subscribe-btn" data-plan="tier1">Subscribe</a>
+        <div class="notice">Secure checkout handled by our payment provider.</div>
+      </div>
+
+      <div class="pricing-card">
+        <h3>Tier 2 — Accelerated Growth</h3>
+        <h2 id="tier2Price">£35 / mo</h2>
+        <ul>
+          <li>All Tier 1 features</li>
+          <li>Tier 2 high-growth strategies</li>
+          <li>Dynamic optimization & rebalancing</li>
+          <li>Benchmark comparison visualizer</li>
+        </ul>
+        <a href="#" class="subscribe-btn" data-plan="tier2">Subscribe</a>
+        <div class="notice">Secure checkout handled by our payment provider.</div>
+      </div>
+
+      <div class="pricing-card">
+        <h3>Tier 3 — Advanced Trading</h3>
+        <h2 id="tier3Price">£50 / mo</h2>
+        <p class="small">For portfolios £50k–£100k; bespoke % of AUM above £100k</p>
+        <ul>
+          <li>Premium Trading Studio access</li>
+          <li>Options & Leveraged ETF modules</li>
+          <li>FX & Futures Algo Packs</li>
+          <li>Dedicated Client Support</li>
+        </ul>
+        <a href="#" class="subscribe-btn" data-plan="tier3">Subscribe</a>
+        <div class="notice">Secure checkout handled by our payment provider.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="container">
+    <h2 class="section-title"><span class="dot"></span> FAQs</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <div class="accordion-header">What is the R.I.G. system?</div>
+        <div class="accordion-content">R.I.G. stands for Risk Intelligence Investing for the Global Investor — Titanovate’s proprietary framework that aligns portfolios to your quantified risk profile.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">Can I switch plans anytime?</div>
+        <div class="accordion-content">Yes. You can change tiers at any time; your plan will update from the next billing cycle.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">Do you offer investment advice?</div>
+        <div class="accordion-content">Titanovate Tech provides analytics and technology; we do not offer investment, tax, or legal advice.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">Which markets are supported?</div>
+        <div class="accordion-content">Currently UK, India, and US — each with localized benchmarks and strategies.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="container">
+    <h2 class="section-title"><span class="dot"></span> Contact Us</h2>
+    <p class="small">Need help? Contact us and our team will respond promptly.</p>
+    <form id="contactForm">
+      <label>Name</label>
+      <input id="name" type="text" placeholder="Your name" required />
+      <label>Email</label>
+      <input id="email" type="email" placeholder="your@email.com" required />
+      <label>Message</label>
+      <textarea id="message" rows="4" placeholder="How can we help?" required></textarea>
+      <br />
+      <button type="submit">Send Message</button>
+      <div id="contactStatus" class="notice" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="container footer small">
+    © 2025 Titanovate Tech. Proprietary Institutional Logic. All rights reserved.
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Monthly/Annual toggle
+    const monthlyBtn = document.getElementById("monthlyBtn");
+    const annualBtn = document.getElementById("annualBtn");
+    monthlyBtn.addEventListener("click", () => {
+      monthlyBtn.classList.add("active"); annualBtn.classList.remove("active");
+      document.getElementById("tier1Price").textContent = "£25 / mo";
+      document.getElementById("tier2Price").textContent = "£35 / mo";
+      document.getElementById("tier3Price").textContent = "£50 / mo";
+    });
+    annualBtn.addEventListener("click", () => {
+      annualBtn.classList.add("active"); monthlyBtn.classList.remove("active");
+      document.getElementById("tier1Price").textContent = "£240 / yr";  // 25 * 12 * 0.8
+      document.getElementById("tier2Price").textContent = "£336 / yr";  // 35 * 12 * 0.8
+      document.getElementById("tier3Price").textContent = "£480 / yr";  // 50 * 12 * 0.8
+    });
+
+    // Payment gateway redirects (replace with real links)
+    const PAYMENT_URL_TIER1 = "https://checkout.your-gateway.com/tier1";
+    const PAYMENT_URL_TIER2 = "https://checkout.your-gateway.com/tier2";
+    const PAYMENT_URL_TIER3 = "https://checkout.your-gateway.com/tier3";
+
+    document.querySelectorAll(".subscribe-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const plan = btn.getAttribute("data-plan");
+        const url = plan === "tier1" ? PAYMENT_URL_TIER1
+                  : plan === "tier2" ? PAYMENT_URL_TIER2
+                  : PAYMENT_URL_TIER3;
+        window.location.href = url;
+      });
+    });
+
+    // CONTACT FORM: POST to FastAPI backend (local or deployed)
+const form = document.getElementById("contactForm");
+const status = document.getElementById("contactStatus");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  status.textContent = "Sending...";
+
+  const payload = {
+    name: document.getElementById("name").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    message: document.getElementById("message").value.trim()
+  };
+
+  try {
+    const res = await fetch("http://127.0.0.1:8000/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) throw new Error("Request failed");
+    const data = await res.json();
+
+    status.innerHTML = `<span class='success'>${data.message}</span>`;
+    form.reset();
+  } catch (err) {
+    console.error(err);
+    status.innerHTML = "<span class='error'>Error sending message. Please try again or email admin@titanovate.com.</span>";
+  }
+});
+
+  </script>
+</body>
+</html>

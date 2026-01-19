@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Risk Screener — Titanovate Tech</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="inner">
+      <div class="brand">
+        <span class="logo"></span>
+        <strong>Titanovate Tech</strong>
+        <span class="small">Risk Intelligence Investing for the Global Investor (R.I.G. system)</span>
+      </div>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="risk.html">Risk Screener</a>
+        <a href="wealth.html">Wealth Builder</a>
+        <a href="trading.html">Trading Studio</a>
+        
+		<div class="nav-dropdown">
+		 <a href="#" class="nav-dropdown-toggle">About ▾</a>
+		 <div class="nav-dropdown-menu">
+			<a href="history.html">History</a>
+			<a href="legalagreement.html">Legal Agreement</a>
+			<a href="privacypolicy.html">Privacy Policy</a>
+			<a href="disclaimer.html">Disclaimer</a>
+		 </div>
+		</div>
+
+        <a class="cta" href="#">Get Started</a>
+        <button class="toggle" data-toggle-theme>🌙 / ☀️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RISK SCREENER -->
+  <div class="container">
+    <h2 class="section-title"><span class="dot"></span> Risk Screener</h2>
+    <p class="small">
+      Titanovate’s Risk Intelligence Gateway (R.I.G.) evaluates your investment profile across global markets to recommend
+      the optimal risk tier and portfolio allocation.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Client Profile</h3>
+
+        <div class="grid">
+          <div>
+            <label>Market Selection</label>
+            <select id="market">
+              <option value="US">US</option>
+              <option value="UK">UK</option>
+              <option value="India">India</option>
+              <option value="US+UK">US + UK</option>
+              <option value="India+US">India + US</option>
+              <option value="India+UK">India + UK</option>
+              <option value="India+US+UK">India + US + UK</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Investment Horizon</label>
+            <select id="horizon">
+              <option value="short">0–12 months</option>
+              <option value="med" selected>1–3 years</option>
+              <option value="long">3+ years</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Drawdown Tolerance</label>
+            <select id="ddtol">
+              <option value="low">Low (&lt;10%)</option>
+              <option value="med" selected>Medium (10–25%)</option>
+              <option value="high">High (25%+)</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Income Desired (monthly)</label>
+            <select id="income">
+              <option value="1">1% p.m.</option>
+              <option value="2-3" selected>2–3% p.m.</option>
+              <option value="3+">&gt;3% p.m.</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Leverage Permitted</label>
+            <select id="leverage">
+              <option value="N" selected>No</option>
+              <option value="Y">Yes</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Derivatives Experience</label>
+            <select id="deriv">
+              <option value="N" selected>No</option>
+              <option value="Y">Yes</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Theme Preference</label>
+            <select id="theme">
+              <option value="neutral" selected>Neutral</option>
+              <option value="growth">Growth</option>
+              <option value="value">Value</option>
+              <option value="momentum">Momentum</option>
+              <option value="balanced">Balanced</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Objective</label>
+            <select id="objective">
+              <option value="income">Income</option>
+              <option value="balanced" selected>Balanced</option>
+              <option value="growth">Growth</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="small">
+          The R.I.G. score aggregates your market exposure, leverage, and growth intent to classify your portfolio into 
+          Tier 1, 2, or 3 for optimal allocation.
+        </p>
+        <button class="cta" id="btnScore" style="margin-top:10px">Compute Risk Score</button>
+      </div>
+
+      <div class="card">
+        <h3>Risk Score Gauge</h3>
+        <div id="gauge" style="height:280px"></div>
+        <div id="tierResult"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="container footer small">
+  © 2025 Titanovate Tech. Proprietary Institutional Logic. All rights reserved.
+  <span style="opacity:.75"> · </span>
+  <a href="disclaimer.html">Disclaimer</a>
+  <span style="opacity:.75"> · </span>
+  <a href="legalagreement.html">Legal Agreement</a>
+  <span style="opacity:.75"> · </span>
+  <a href="privacypolicy.html">Privacy Policy</a>
+</div>
+
+
+  <script src="script.js"></script>
+  <script>
+    function renderGauge(score) {
+      const data = [{
+        type: 'indicator',
+        mode: 'gauge+number',
+        value: score,
+        gauge: {
+          axis: { range: [0, 100] },
+          bar: { color: '#14B8A6' },
+          steps: [
+            { range: [0, 33], color: 'rgba(239,68,68,.35)' },
+            { range: [33, 66], color: 'rgba(245,158,11,.35)' },
+            { range: [66, 100], color: 'rgba(20,184,166,.35)' }
+          ]
+        },
+        number: { suffix: ' / 100' }
+      }];
+      const layout = {
+        margin: { t: 0, b: 0, l: 0, r: 0 },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)'
+      };
+      Plotly.newPlot('gauge', data, layout, { displayModeBar: false });
+    }
+
+    // Compute score based on selections
+    document.getElementById('btnScore').onclick = () => {
+      const horizon = document.getElementById('horizon').value;
+      const ddtol = document.getElementById('ddtol').value;
+      const income = document.getElementById('income').value;
+      const leverage = document.getElementById('leverage').value;
+      const deriv = document.getElementById('deriv').value;
+      const objective = document.getElementById('objective').value;
+      const theme = document.getElementById('theme').value;
+      const market = document.getElementById('market').value;
+
+      let base = 50; // starting midpoint
+
+      if (horizon === 'long') base += 10;
+      if (horizon === 'short') base -= 10;
+      if (ddtol === 'high') base += 10;
+      if (ddtol === 'low') base -= 10;
+
+      if (income === '1') base -= 5;
+      if (income === '2-3') base += 5;
+      if (income === '3+') base += 10;
+
+      if (leverage === 'Y') base += 10;
+      if (deriv === 'Y') base += 10;
+      if (objective === 'growth') base += 5;
+      if (theme === 'momentum' || theme === 'growth') base += 5;
+
+      if (market.includes('+')) base += 5; // multi-region = higher complexity tolerance
+      if (market === 'India') base -= 2; // more volatility
+      if (market === 'US+UK' || market === 'India+US+UK') base += 5;
+
+      const score = Math.max(0, Math.min(100, base));
+      renderGauge(score);
+      showTierResult(score);
+    };
+
+    renderGauge(50);
+  </script>
+</body>
+</html>

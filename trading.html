@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Trading Studio — Titanovate Tech</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="inner">
+      <div class="brand">
+        <span class="logo"></span>
+        <strong>Titanovate Tech</strong>
+        <span class="small">Risk Intelligence Investing for the Global Investor (R.I.G. system)</span>
+      </div>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="risk.html">Risk Screener</a>
+        <a href="wealth.html">Wealth Builder</a>
+        <a href="trading.html">Trading Studio</a>
+        
+		<div class="nav-dropdown">
+		 <a href="#" class="nav-dropdown-toggle">About ▾</a>
+		 <div class="nav-dropdown-menu">
+			<a href="history.html">History</a>
+			<a href="legalagreement.html">Legal Agreement</a>
+			<a href="privacypolicy.html">Privacy Policy</a>
+			<a href="disclaimer.html">Disclaimer</a>
+		 </div>
+		</div>
+
+        <a class="cta" href="#">Get Started</a>
+        <button class="toggle" data-toggle-theme>🌙 / ☀️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRADING STUDIO -->
+  <div class="container">
+    <h2 class="section-title"><span class="dot"></span> Trading Studio</h2>
+    <p class="small">
+      <b>Premium offering</b> for advanced trading strategies powered by Titanovate Tech’s proprietary <b>Algo Engine</b>. 
+      Designed for professional and institutional clients to manage and trade complex exposures efficiently.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Strategy Performance Snapshot</h3>
+        <div id="barChart" style="height:380px"></div>
+        <p class="small">Relative alpha (%) vs market benchmark for major strategy types.</p>
+      </div>
+
+      <div class="card">
+        <h3>Core Strategy Types</h3>
+        <ul>
+          <li><b>Options Trading:</b> systematic covered calls, spreads, and volatility premium capture.</li>
+          <li><b>Leveraged ETFs:</b> 2×/3× tactical exposure with stop-loss and dynamic scaling.</li>
+          <li><b>FX & Futures:</b> global macro and trend-following with strict VaR limits.</li>
+          <li><b>Cross-Asset Pairs:</b> correlation-driven long–short setups between equities, FX, and commodities.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Execution Dashboard</h3>
+        <ul>
+          <li>Automated stops and trailing profit protection.</li>
+          <li>Real-time exposure and leverage monitoring.</li>
+          <li>Sharpe and Sortino performance tracking by regime.</li>
+          <li>Direct broker and exchange API connectivity.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="container footer small">
+  © 2025 Titanovate Tech. Proprietary Institutional Logic. All rights reserved.
+  <span style="opacity:.75"> · </span>
+  <a href="disclaimer.html">Disclaimer</a>
+  <span style="opacity:.75"> · </span>
+  <a href="legalagreement.html">Legal Agreement</a>
+  <span style="opacity:.75"> · </span>
+  <a href="privacypolicy.html">Privacy Policy</a>
+</div>
+
+
+  <script src="script.js"></script>
+  <script>
+    // Simple bar chart showing relative alpha by strategy
+    const strategies = ["Options", "ETFs", "FX", "Futures", "Pairs"];
+    const alpha = [8.5, 6.2, 5.4, 7.1, 4.3];
+
+    const trace = {
+      x: strategies,
+      y: alpha,
+      type: "bar",
+      marker: {
+        color: ['#14B8A6', '#0B72B9', '#0B72B9', '#14B8A6', '#7dd3fc'],
+        line: { color: "#e2e8f0", width: 1.5 }
+      }
+    };
+
+    const layout = {
+      yaxis: { title: "Alpha (%)", gridcolor: "rgba(255,255,255,0.1)" },
+      margin: { t: 30, l: 50, r: 10, b: 40 },
+      paper_bgcolor: "rgba(0,0,0,0)",
+      plot_bgcolor: "rgba(0,0,0,0)"
+    };
+
+    Plotly.newPlot("barChart", [trace], layout, { displayModeBar: false });
+  </script>
+</body>
+</html>
